@@ -9,10 +9,12 @@
 #include "utils.h"
 #include "search.h"
 
-int insertArtist(Artist*, int);
-int removeArtist(Artist*, int);
-void editArtist(Artist*, int);
-void binarySearchByName(Artist*, int);
-void SequencialSearchByAlbum(Artist*, int);
+int insertGuests(Artist*, int);
+void listGuests(Artist*, int);
+void getGuestByName(Artist*, int);
+void editGuest(Artist*, int);
+void setEmptyRoom(Artist*, int);
+void countEmptyRooms(Artist*, int);
+void saveFile(Artist*, int);
 
 #endif
