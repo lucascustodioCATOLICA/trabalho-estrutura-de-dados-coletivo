@@ -2,7 +2,7 @@
 
 int insertGuests(Guest* guests, int size)
 {
-    return;
+
 }
 
 void listGuests(Guest* guests, int size)
@@ -22,7 +22,7 @@ void editGuest(Guest* guests, int size)
 
 int removeGuest(Guest* guests, int size)
 {
-    return;
+
 }
 
 void countEmptyRooms(Guest* guests, int size)

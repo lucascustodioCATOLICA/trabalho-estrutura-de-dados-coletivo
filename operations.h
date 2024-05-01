@@ -13,7 +13,7 @@ int insertGuests(Guest*, int);
 void listGuests(Guest*, int);
 void getGuestByName(Guest*, int);
 void editGuest(Guest*, int);
-void removeGuest(Guest*, int);
+int removeGuest(Guest*, int);
 void countEmptyRooms(Guest*, int);
 void saveFile(Guest*, int);
 

@@ -7,7 +7,7 @@
 #include "types.h"
 #include "utils.h"
 
-int readFile(Artist*);
-void writeFile(Artist*, int);
+int readFile(Guest*);
+void writeFile(Guest*, int);
 
 #endif

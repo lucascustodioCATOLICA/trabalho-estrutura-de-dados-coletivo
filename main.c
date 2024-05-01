@@ -7,7 +7,7 @@
 int main ()
 {
     setlocale(LC_ALL, "C.UTF-8");
-    Guest* guests = (Guest*) malloc(sizeof(Guest) * MAX_LENGTH);
+    Guest* guests = (Guest*) malloc(sizeof(Guest) * MAX_GUESTS_LENGTH);
     int size = readFile(guests);
     if(size == -1) {
         return 1;

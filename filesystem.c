@@ -1,8 +1,8 @@
 #include "filesystem.h"
 
-enum LINE_STATUS {NAME, GENDER, BORN_AT, ALBUMS} typedef LINE_STATUS;
+enum LINE_STATUS {NAME, GENDER, AGE, ROOM_ID} typedef LINE_STATUS;
 
-int readFile (Artist* artists)
+int readFile (Guest* guest)
 {   
     FILE* file = fopen("dados.txt", "r");
     if (file == NULL) {
@@ -13,33 +13,26 @@ int readFile (Artist* artists)
     char line[256];
     LINE_STATUS lineStatus = NAME;
     int index = 0;
-    int albuns_index = 0;
     while(fgets(line, sizeof(line), file) != NULL) { 
         removeNewlineCh(line);
         switch (lineStatus)
         {
             case NAME:
-                strcpy((artists + index)->name, line);
+                strcpy((guest + index)->name, line);
                 lineStatus = GENDER;
                 break;
             case GENDER:
-                strcpy((artists + index)->gender, line);
-                lineStatus = BORN_AT;
+                (guest + index)->gender = (char) line[0];
+                lineStatus = AGE;
                 break;
-            case BORN_AT:
-                strcpy((artists + index)->bornAt, line);
-                lineStatus = ALBUMS;
+            case AGE:
+                (guest + index)->age = atoi(line);
+                lineStatus = ROOM_ID;
                 break;
-            case ALBUMS:
-                if(line[0] != '=') {
-                    strcpy((artists + index)->albums[albuns_index].name, line);
-                    albuns_index++;
-                    break;
-                }
-                (artists + index)->albumsSize = albuns_index;
-                albuns_index = 0;
+            case ROOM_ID:
+                (guest + index)->roomId = (char) line[0];
                 lineStatus = NAME;
-                index++;
+                fgets(line, sizeof(line), file); // skips '====' line
                 break;
         }
     }
@@ -49,7 +42,7 @@ int readFile (Artist* artists)
     return index;
 }
 
-void writeFile (Artist* artists, int size)
+void writeFile (Guest* guests, int size)
 {
     FILE* file = fopen("dados.txt", "w");
     if (file == NULL) {
@@ -58,13 +51,11 @@ void writeFile (Artist* artists, int size)
     }
 
     for(int i=0; i<size; i++) {
-        fprintf(file, "%s \n", artists[i].name);
-        fprintf(file, "%s \n", artists[i].gender);
-        fprintf(file, "%s \n", artists[i].bornAt);
-        for(int j=0; j<artists[i].albumsSize; j++) {
-            fprintf(file, "%s \n", artists[i].albums[j].name);
-        }
-        fprintf(file, "========== \n");
+        fprintf(file, "%s\n", guests[i].name);
+        fprintf(file, "%c\n", guests[i].gender);
+        fprintf(file, "%d\n", guests[i].age);
+        fprintf(file, "%c\n", guests[i].roomId);
+        fprintf(file, "==========\n");
     }
 
     fclose(file);
