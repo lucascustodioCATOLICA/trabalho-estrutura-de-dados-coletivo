@@ -1,14 +1,14 @@
 #include "sort.h"
 
-void sort(Artist* artists, int size)
+void sort(Guest* guests, int size)
 {
-    Artist tmp;
+    Guest tmp;
     for (int j = 0; j < size-1; j++) {
         for (int i = 0; i < size-1; i++) {
-            if(strcmp(artists[i].name, artists[i + 1].name) > 0) {
-                tmp = artists[i];
-                artists[i] = artists[i + 1];
-                artists[i + 1] = tmp;
+            if(strcmp(guests[i].name, guests[i + 1].name) > 0) {
+                tmp = guests[i];
+                guests[i] = guests[i + 1];
+                guests[i + 1] = tmp;
             }
         }
     }

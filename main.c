@@ -7,8 +7,8 @@
 int main ()
 {
     setlocale(LC_ALL, "C.UTF-8");
-    Artist* artists = (Artist*) malloc(sizeof(Artist) * MAX_LENGTH);
-    int size = readFile(artists);
+    Guest* guests = (Guest*) malloc(sizeof(Guest) * MAX_LENGTH);
+    int size = readFile(guests);
     if(size == -1) {
         return 1;
     }
@@ -16,30 +16,38 @@ int main ()
     int input = 0;
     do {
         printf("TRABALHO DE ESTRUTURA DE DADOS!!! \n\n");
-        printf("1 - Inserção ordenada (por nome) de novos artistas \n");
-        printf("2 - Remoção de um artista \n");
-        printf("3 - Edição de um artista \n");
-        printf("4 - Busca binária por um artista \n");
-        printf("5 - Busca sequencial por um álbum \n");
+        printf("1 - Inserir hóspedes em um quarto vazio (um quarto pode ter mais de um hóspede) \n");
+        printf("2 - Listar hóspedes por ordem alfabética \n");
+        printf("3 - Buscar hóspede \n");
+        printf("4 - Editar hóspede \n");
+        printf("5 - Liberar um quarto \n");
+        printf("6 - Mostrar os números dos quartos vazios \n");
+        printf("7 - Salvar lista de hóspedes com respectivos quartos em arquivo \n");
         printf("9 - Sair \n");
         scanf("%d", &input);
 
         switch (input)
         {
         case 1:
-            size = insertArtist(artists, size);
+            size = insertGuests(guests, size);
             break;
         case 2:
-            size = removeArtist(artists, size);
+            listGuests(guests, size);
             break;
         case 3:
-            editArtist(artists, size);
+            getGuestByName(guests, size);
             break;
         case 4:
-            binarySearchByName(artists, size);
+            editGuest(guests, size);
             break;
         case 5:
-            SequencialSearchByAlbum(artists, size);
+            removeGuest(guests, size);
+            break;
+        case 6:
+            countEmptyRooms(guests, size);
+            break;
+        case 7:
+            saveFile(guests, size);
             break;
         default:
             break;

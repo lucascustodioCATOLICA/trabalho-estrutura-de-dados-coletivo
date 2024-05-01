@@ -5,6 +5,6 @@
 
 #include "types.h"
 
-Artist binarySearch(Artist* artists, char* name, int low, int high);
+Guest binarySearch(Guest* guests, char* name, int low, int high);
 
 #endif
