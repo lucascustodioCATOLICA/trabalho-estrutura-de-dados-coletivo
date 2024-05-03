@@ -1,20 +1,52 @@
-# Como executar:
+# Sistema de registro de hóspedes para hotéis (Simulação)
+ Este é um trabalho em grupo desenvolvido em linguagem C, o qual simula um sistema de registro de hóspedes para um hotel. Para a realização deste projeto foram utilizado conteúdos tanto abordados em sala de aula quanto adquiridos fora dela.
 
-## Para compilar:
+### Funcionalidades:
 
-`gcc main.c filesystem.c .\operations.c .\sort.c .\utils.c .\search.c -o output.exe`
+- Inserir hóspedes em quartos vazios.
+- Listar hóspedes por ordem alfabética.
+- Buscar hóspede.
+- Editar hóspede.
+- Liberar um quarto.
+- Mostrar os números dos quartos vazios.
+- Salvar lista de hóspedes com respectivos quartos em arquivo.
 
-## Para executar:
+## Como usar
 
-`./output.exe`
+Para compilar o código, abra o terminal do compilador e siga as seguintes instruções:
 
-## OBS 1:
+Clone este repositório, em seguida entre dentro da pasta copiada
+
+```bash
+git clone https://github.com/pedro-CL/Registro-de-hospede.git
+cd Registro-de-hospede/
+```
+Compile o código `main.c` e execute
+```
+gcc main.c filesystem.c .\operations.c .\sort.c .\utils.c .\search.c -o output.exe
+./output.exe
+```
+## OBS:
 
 No Powershell, executar o seguinte codigo para resolver problema dos acentos:
 
-`$OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding =
-New-Object System.Text.UTF8Encoding`
+```
+$OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding =
+New-Object System.Text.UTF8Encoding
+```
 
 No CMD, executar o seguinte codigo para resolver problema dos acentos:
 
-`chcp 65001`
+```
+chcp 65001
+```
+
+ # Integrantes do projeto
+ 
+| Foto | Nome | GitHub | Linkedin |
+| ------ | ---- | ------ |--------- |
+| <img src="https://media.licdn.com/dms/image/D4D03AQFPHwofyIH4Sw/profile-displayphoto-shrink_800_800/0/1701553141096?e=1720051200&v=beta&t=4opJbA9HxBOvEVeJxJhEnSmi5Sp2a9RDwcQrgSVbpJM" width="55" height="55"> | Pedro Carneiro de Lima | ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) | <a href="https://www.linkedin.com/in/pedro-carneiro-lima/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" target="_blanck"></a> |
+| <img src="https://media.licdn.com/dms/image/D4D03AQFgbE0r-V-aGg/profile-displayphoto-shrink_800_800/0/1707582136102?e=1720051200&v=beta&t=-j4-E4zCzr_baVQJzKnqQTvE2B7mnxGY4yUwpcdnQTg" width="55" height="55"> | Lucas Francisco Custódio | ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) | <a href="https://www.linkedin.com/in/afslucass/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" target="_blanck"></a> |
+| <img src="https://avatars.githubusercontent.com/u/133895618?v=4" width="55" height="55"> |  Arthur Faria dos Santos | ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) | <a href="https://www.linkedin.com/in/pedro-carneiro-lima/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" target="_blanck"></a> |
+| <img src="" width="55" height="55"> | Pedro Luis da Silva | ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) | <a href="https://www.linkedin.com/in/pedro-carneiro-lima/"><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" target="_blanck"></a> |
+
