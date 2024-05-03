@@ -7,7 +7,6 @@
 ## Para executar:
 
 `./output.exe`
-aslkdfjdçsaljfsadlçi
 
 ## OBS 1:
 
