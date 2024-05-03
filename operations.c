@@ -2,7 +2,7 @@
 
 int insertGuests(Guest* guests, int size)
 {
-
+    return 10;
 }
 
 void listGuests(Guest* guests, int size)
