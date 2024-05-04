@@ -95,5 +95,7 @@ void countEmptyRooms(Guest* guests, int size)
 
 void saveFile(Guest* guests, int size)
 {
+    sort(guests, size);
+    writeFile(guests, size);
     return;
 }
