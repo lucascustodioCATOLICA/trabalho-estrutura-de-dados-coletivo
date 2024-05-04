@@ -33,6 +33,7 @@ int readFile (Guest* guest)
                 (guest + index)->roomId = (char) line[0];
                 lineStatus = NAME;
                 fgets(line, sizeof(line), file); // skips '====' line
+                index++;
                 break;
         }
     }
@@ -59,6 +60,7 @@ void writeFile (Guest* guests, int size)
     }
 
     fclose(file);
-    
+
+    printf("Dados salvos com sucesso! \n");
     return;
 }
