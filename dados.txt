@@ -3,6 +3,21 @@ F
 20
 C
 ==========
+Enzo
+M
+10
+R
+==========
+Fabiana
+F
+38
+M
+==========
+Giovanni
+M
+45
+L
+==========
 Joao Carlos
 M
 21
@@ -12,4 +27,14 @@ Lucas Francisco
 M
 20
 A
+==========
+Natasha
+F
+18
+L
+==========
+Pedro Carneiro
+M
+18
+D
 ==========
