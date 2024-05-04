@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include "operations.h"
 
 int insertGuests(Guest* guests, int size)
@@ -49,7 +50,7 @@ int insertGuests(Guest* guests, int size)
             fflush(stdin);
             scanf("%c", &new.gender);
             new.gender = toupper(new.gender);
-            if(new.gender == '9') return size;
+            if(new.gender == '8') return size;
         } while (new.gender != 'F' && new.gender != 'M');
 
         printf("Deseja adicionar mais um Hóspede para este quarto? \n");
@@ -89,7 +90,104 @@ int removeGuest(Guest* guests, int size)
 }
 
 void countEmptyRooms(Guest* guests, int size)
-{
+{   
+    system("cls");
+
+    int returnOption = 0;
+    do{
+
+        printf("------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
+        printf("                                 ============================================================\n");        
+        printf("                                   [6] Mostrar os números dos quartos vazios\n");
+        printf("                                   [0] Voltar para o menu principal\n");
+        printf("                                 ============================================================\n");
+        printf("-------------------------------------------------------------------------------------------------------------------------------\n");
+        fflush(stdin);
+        printf("--> Digite o numero desejado: ");
+        scanf("%d",&returnOption);
+        if(returnOption != 6 && returnOption != 0){
+            system("cls");
+            printf("\a");
+            printf("                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
+            printf("\n                                      *** Opçaõ inválida, digite o numero '6' ou '0' ***");
+            printf("\n                                 \033[1;31m============================================================\033[0m\n\n");
+        }
+    }while(returnOption != 6 && returnOption != 0);
+
+    if(returnOption == 6){
+
+        system("cls");
+
+        printf("\n\033[1;34mMENSAGEM:\033[0m Analisando os dados dos hospedes, por favor aguarde.\n");
+        
+        int total = 20;
+        char fullBar = '#';
+        char emptyBar = '-';
+        
+        for (int i = 0; i <= total; ++i) {
+
+            int percent = 0;
+
+            printf("\r%s... [","Carregando");
+
+            for (int j = 0; j < i; ++j) {
+                printf("%c", fullBar);
+                percent = i * 5;
+            }
+            
+            for (int j = i; j < total; ++j) {
+                printf("%c", emptyBar);
+            }    
+
+            printf("] %d%% \r", percent);
+            fflush(stdout);
+            sleep(1);
+            printf("\r");
+        }
+        printf("\n\n");
+        system("cls");
+
+        char option;
+        int emptyRoomCount = 0;
+        int occupiedRoomsCount = 0;
+
+        printf("\n------------------------------------------------------- QUARTOS DO HOTEL ------------------------------------------------------\n");
+        printf("           ");
+        for (int i = 0; i < 26; i++) {
+            int found = 0;
+            for (int j = 0; j < size; j++) {
+                if (guests[j].roomId == 'A'+ i) {
+                    found = 1;
+                    break;
+                }
+            }
+            if (found) {
+                printf("\033[31;1m| %c \033[0m", 'A'+ i);
+                occupiedRoomsCount++;
+            }else{
+                printf("\033[32;1m");printf("\033[32;1m| %c \033[0m", 'A'+ i);
+                emptyRoomCount++;
+            }
+        }
+        printf("\n-------------------------------------------------------------------------------------------------------------------------------\n\n");
+        printf("\n  ============================================\n");
+        printf("  || TOTAL DE QUARTOS:                   26 ||\n");
+        printf("  ||----------------------------------------||\n");
+        printf("  || \033[31;1mQUARTOS OCUPADOS:                   %.2d\033[0m ||\n", occupiedRoomsCount);
+        printf("  ||----------------------------------------||\n");
+        printf("  || \033[32;1mQUARTOS DISPONÍVEIS:                %.2d\033[0m ||\n", emptyRoomCount);
+        printf("  ============================================\n");
+        printf("\n-------------------------------------------------------------------------------------------------------------------------------\n\n");
+        for(int i = 10; i >= 0; i--){
+            printf("\r\033[1;34mMENSAGEM:\033[0m Voltando para o menu principal em... %d ", i);
+            sleep(1);
+        }
+        system("cls");
+    }
+    if(returnOption == 0){
+        system("cls");
+        return;
+    }
     return;
 }
 
