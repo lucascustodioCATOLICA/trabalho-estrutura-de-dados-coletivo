@@ -18,12 +18,12 @@ Para compilar o código, abra o terminal do compilador e siga as seguintes instr
 Clone este repositório, em seguida entre dentro da pasta copiada
 
 ```bash
-git clone https://github.com/pedro-CL/Registro-de-hospede.git
-cd Registro-de-hospede/
+git clone https://github.com/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo.git
+cd trabalho-estrutura-de-dados-coletivo/
 ```
 Compile o código `main.c` e execute
 ```
-gcc main.c filesystem.c .\operations.c .\sort.c .\utils.c .\search.c -o output.exe
+gcc main.c commands.c .\filesystem.c .\operations.c .\sort.c .\utils.c .\search.c -o output.exe
 ./output.exe
 ```
 ## OBS:
