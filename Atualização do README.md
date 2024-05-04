@@ -21,21 +21,26 @@ Clone este repositório, em seguida entre dentro da pasta copiada
 git clone https://github.com/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo.git
 cd trabalho-estrutura-de-dados-coletivo/
 ```
+<br>
+
+> [!IMPORTANT]
+> Antes de executar o código, copie o comando em 'Acentos:' para que possa ler corretamente os acentos da língua portuguesa
+
 Compile o código `main.c` e execute
 ```
 gcc main.c commands.c .\filesystem.c .\operations.c .\sort.c .\utils.c .\search.c -o output.exe
 ./output.exe
 ```
-## OBS:
+## Acentos:
 
-No Powershell, executar o seguinte codigo para resolver problema dos acentos:
+No Powershell, execute o seguinte codigo para resolver problema dos acentos:
 
 ```
 $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding =
 New-Object System.Text.UTF8Encoding
 ```
 
-No CMD, executar o seguinte codigo para resolver problema dos acentos:
+Se for pelo Prompt de comando(CMD), execute o seguinte codigo para resolver problema dos acentos:
 
 ```
 chcp 65001
