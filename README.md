@@ -1,4 +1,20 @@
 # Sistema de registro de hóspedes para hotéis (Simulação)
+
+<p align="center">
+  <a href="https://github.com/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo.svg" alt="Contributors">
+  </a>
+  <a href="https://github.com/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo/commits/master">
+    <img src="https://img.shields.io/github/commit-activity/m/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo.svg" alt="Commit Activity">
+  </a>
+  <a href="https://github.com/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo">
+    <img src="https://img.shields.io/github/languages/code-size/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo" alt="Code Size">
+  </a>
+  <a href="https://github.com/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo">
+    <img src="https://img.shields.io/tokei/lines/github/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo" alt="Lines of Code">
+  </a>
+</p>
+
  Este é um trabalho em grupo desenvolvido em linguagem C, o qual simula um sistema de registro de hóspedes para um hotel. Para a realização deste projeto foram utilizado conteúdos tanto abordados em sala de aula quanto adquiridos fora dela.
 
 ### Funcionalidades:
