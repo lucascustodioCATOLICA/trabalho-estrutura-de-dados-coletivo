@@ -40,14 +40,14 @@ cd trabalho-estrutura-de-dados-coletivo/
 <br>
 
 > [!IMPORTANT]
-> Antes de executar o código, copie o comando em 'Acentos:' para que possa ler corretamente os acentos da língua portuguesa
+> Antes de executar o código, copie o comando em 'Correção dos Acentos:' para que possa ler corretamente os acentos da língua portuguesa
 
 Compile o código `main.c` e execute
 ```
 gcc main.c commands.c .\filesystem.c .\operations.c .\sort.c .\utils.c .\search.c -o output.exe
 ./output.exe
 ```
-## Acentos:
+## Correção dos Acentos:
 
 No Powershell, execute o seguinte codigo para resolver problema dos acentos:
 
