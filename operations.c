@@ -335,9 +335,9 @@ int removeGuest(Guest* guests, int size)
     }
     if(returnOption == 0){
         system("cls");
-        return;
+        return size;
     }
-    return;
+    return size-1;
 }
 
 void countEmptyRooms(Guest* guests, int size)
