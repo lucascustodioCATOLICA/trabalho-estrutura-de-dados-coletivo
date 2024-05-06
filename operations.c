@@ -73,6 +73,7 @@ int insertGuests(Guest* guests, int size)
 void listGuests(Guest* guests, int size)
 {
     system("cls");
+    sort(guests, size);
 
     int returnOption = 0;
     do{
@@ -98,13 +99,14 @@ void listGuests(Guest* guests, int size)
     if(returnOption == 2){
         system("cls");
         printf("\n------------------------------------------------- Lista por ordem alfabética --------------------------------------------------\n");
-        //for(int i = 0; Coloque as operações para o algoritmo executar o numero [2] ; i++){
+        for(int i = 0; i<size; i++){
             printf("\n          ============================================================================================================\n");
-            printf("\n          \033[1m Nome:\033[0m %s"/*colocar a variavel do nome [i] do hospede da lista*/);
-            printf("\n          \033[1m Idade:\033[0m %d"/*colocar a variavel do idade [i] do hospede da lsita*/);
-            printf("\n          \033[1m ID do quarto:\033[0m %s \n"/*colocar a variavel do ID [i] do hospede da lsita*/);
+            printf("\n          \033[1m Nome:\033[0m %s", guests[i].name);
+            printf("\n          \033[1m Idade:\033[0m %d", guests[i].age);
+            printf("\n          \033[1m Genero:\033[0m %c", guests[i].gender);
+            printf("\n          \033[1m ID do quarto:\033[0m %c \n", guests[i].roomId);
             printf("\n          ============================================================================================================\n");
-        //}
+        }
         printf("-------------------------------------------------------------------------------------------------------------------------------\n\n");
 
         for(int i = 10; i >= 0; i--){
