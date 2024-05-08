@@ -12,7 +12,7 @@ int insertGuests(Guest* guests, int size)
     sort(guests, size);
 
     Guest new;
-    Guest hasGuestInSameRoom = binarySearchByRoomId(guests, new.roomId, 0, size);
+    Guest hasGuestInSameRoom;
     do
     {
         printf("Digite o Codigo do quarto: \n");
@@ -22,6 +22,7 @@ int insertGuests(Guest* guests, int size)
         scanf("%c", &new.roomId);
         new.roomId = toupper(new.roomId);
         if(new.roomId == '9') return size;
+        hasGuestInSameRoom = binarySearchByRoomId(guests, new.roomId, 0, size);
         if(strcmp(hasGuestInSameRoom.name, "NULL") != 0) {
             printf("Quarto ja esta em uso! Tente outro quarto. \n\n");
         }

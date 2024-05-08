@@ -32,8 +32,8 @@ int readFile (Guest* guest)
             case ROOM_ID:
                 (guest + index)->roomId = (char) line[0];
                 lineStatus = NAME;
-                fgets(line, sizeof(line), file); // skips '====' line
                 index++;
+                fgets(line, sizeof(line), file); // skips '====' line
                 break;
         }
     }
