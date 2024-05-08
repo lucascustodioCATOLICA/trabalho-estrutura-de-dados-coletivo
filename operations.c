@@ -152,31 +152,30 @@ void getGuestByName(Guest* guests, int size)
         system("cls");
 
         printf("\nDigite o nome do hóspede que deseja encontrar: ");
-        //scanf....
+        char name [51];
+        fflush (stdin);
+        fgets (name, sizeof(name), stdin);
+        removeNewlineCh(name);
+        Guest guest = binarySearch(guests, name, 0, size);
+         
+        if (strcmp (guest.name, "NULL")  == 0) {
+            printf("hospede nao Encontrado");
+            return;
+        }
+    
         system("cls");
         //Coloque as operações para o algoritmo executar o numero [3]
-        printf("\n\033[;34mMENSAGEM:\033[0m Buscando '%s' na lista, por favor aguarde.\n" /*colocar a variavel que guardou o nome do hospede a ser buscado*/);
+        printf("\n\033[;34mMENSAGEM:\033[0m Buscando '%s' na lista, por favor aguarde.\n", name);
         loading(150, "Carregando");
         
         //if(/*operação para o resultado encontrado*/){
             system("cls");
-            printf("----------------------------------------------------- Resultado da busca ------------------------------------------------------\n");
-            printf("\n                                 ============================================================");
-            printf("\n                                 Nome:%s"/*colocar a variavel que encontrou o nome do hospede buscado*/);
-            printf("\n                                 Idade:%d"/*colocar a variavel que encontrou a idade do hospede buscado*/);
-            printf("\n                                 ID:%c"/*colocar a variavel que encontrou o ID do quarto do hospede buscado*/);
-            printf("\n                                 ============================================================\n");
-            printf("\n-------------------------------------------------------------------------------------------------------------------------------\n\n");
-        //}else{
-            system("cls");
-            printf("\a");
-            printf("\n\n                                 \033[38;5;208m=================  HÓSPEDE NÃO ENCONTRADO  =================\033[0m");
-            printf("\n                                     \033[38;5;208m*** Nome do hóspede não foi encontrado na lista ***\033[0m");
-            printf("\n                                 \033[38;5;208m============================================================\033[0m\n\n\n");
-            sleep(2);
-
-            //colocar uma operação para voltar ao menu secundário
-        //}
+                printf("----------------------------------------------------- Resultado da busca ------------------------------------------------------\n");
+                printf("\n                                 Nome:%s", guest.name);
+                printf("\n                                 Genero:%c",guest.gender);
+                printf("\n                                 Idade:%d", guest.age);
+                printf("\n                                 ID:%c", guest.roomId);
+                printf("\n-------------------------------------------------------------------------------------------------------------------------------\n\n");
         for(int i = 10; i >= 0; i--){
             printf("\r\033[1;34mMENSAGEM:\033[0m Voltando para o menu principal em... %d ", i);
             sleep(1);

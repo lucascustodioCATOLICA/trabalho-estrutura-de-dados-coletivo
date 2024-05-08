@@ -37,14 +37,14 @@ Clone este repositório, em seguida entre dentro da pasta copiada
 git clone https://github.com/lucascustodioCATOLICA/trabalho-estrutura-de-dados-coletivo.git
 cd trabalho-estrutura-de-dados-coletivo/
 ```
-<br>
 
-> [!IMPORTANT]
-> Antes de executar o código, copie o comando em 'Correção dos Acentos:' para que possa ler corretamente os acentos da língua portuguesa
-
-Compile o código `main.c` e execute
+Compile:
 ```
 gcc main.c commands.c .\filesystem.c .\operations.c .\sort.c .\utils.c .\search.c -o output.exe
+```
+
+E depois, execute:
+```
 ./output.exe
 ```
 ## Correção dos Acentos:
