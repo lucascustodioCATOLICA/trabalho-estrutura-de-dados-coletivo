@@ -342,7 +342,7 @@ int removeGuest(Guest* guests, int size) {
             }
         }
 
-        // Se o quarto não foi encontrado
+        // Se o quarto não foi encontrado //
         printf("\n\n                                          \033[91m============================================\033[0m\n");
         printf("                                             \033[91mMENSAGEM: Quarto não encontrado!\033[0m\n");
         printf("                                          \033[91m============================================\033[0m\n\n");
