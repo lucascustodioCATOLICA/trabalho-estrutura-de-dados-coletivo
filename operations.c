@@ -273,73 +273,87 @@ void editGuest(Guest* guests, int size)
     return;
 }
 
-int removeGuest(Guest* guests, int size)
-{
+int removeGuest(Guest* guests, int size) {
     system("cls");
 
     int returnOption = 0;
-    do{
+    do {
         printf("------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
-        printf("                                 ============================================================\n");        
+        printf("                                 ============================================================\n");
         printf("                                   [5] Liberar um quarto\n");
         printf("                                   [0] Voltar para o menu principal\n");
         printf("                                 ============================================================\n");
         printf("-------------------------------------------------------------------------------------------------------------------------------\n");
         fflush(stdin);
         printf("--> Digite o numero desejado: ");
-        scanf("%d",&returnOption);
+        scanf("%d", &returnOption);
 
-        if(returnOption != 5 && returnOption != 0){
+        if (returnOption != 5 && returnOption != 0) {
             system("cls");
             printf("\a");
             printf("                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
-            printf("\n                                      *** Opçaõ inválida, digite o numero '5' ou '0' ***");
+            printf("\n                                      *** Opção inválida, digite o numero '5' ou '0' ***");
             printf("\n                                 \033[1;31m============================================================\033[0m\n\n");
         }
-    }while(returnOption != 5 && returnOption != 0);
+    } while (returnOption != 5 && returnOption != 0);
 
-    if(returnOption == 5){
+    if (returnOption == 5) {
         system("cls");
 
         printf("------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
-        printf("                                 ============================================================\n");        
+        printf("                                 ============================================================\n");
         printf("                                 \033[1;34m->[5] Liberar um quarto \033[0m\n");
         printf("                                   [0] Voltar para o menu principal\n");
         printf("                                 ============================================================\n");
         printf("-------------------------------------------------------------------------------------------------------------------------------\n");
-        printf("--> Digite o código do quarto: ");
+        printf("--> Digite o número do quarto: ");
+        int roomToFree;
         fflush(stdin);
-        scanf("%s"/*completar*/);
+        scanf("%d", &roomToFree);
 
-        system("cls");
-        //modifique o 'D' para %s para imprimir o ID do quarto digitado, claro, tambem coloque a variavel para imprimir o conteudo do %s
-        printf("\n ID do quarto: D \033[31m(Liberar)\033[0m");
-        printf("\n-------------------------------------------------------------------------------------------------------------------------------\n");
-        //for(int i = 0; Coloque as operações para o algoritmo executar e mostra as informações do quarto liberado ; i++){
-            printf("\n============================================================");
-            printf("\n Nome: "/*colocar a variavel do novo nome do hospede*/);
-            printf("\n Idade: "/*colocar a variavel do novo idade do hospede*/);
-            printf("\n ID: "/*colocar a variavel do novo ID do quarto do hospede*/);
-            printf("\n============================================================\n");
-        //}
-        printf("\n-------------------------------------------------------------------------------------------------------------------------------\n");
+        // Encontrar o hóspede no quarto especificado e liberar o quarto
+        int i;
+        for (i = 0; i < size; i++) {
+            if (guests[i].roomId == roomToFree) {
+                printf("\n ID do quarto: %d \033[31m(Liberar)\033[0m", guests[i].roomId);
+                printf("\n-------------------------------------------------------------------------------------------------------------------------------\n");
+                printf("\n============================================================");
+                printf("\n Nome: %s", guests[i].name);
+                printf("\n Idade: %d", guests[i].age);
+                printf("\n ID: %d", guests[i].roomId);
+                printf("\n============================================================\n");
 
-        //Coloque as operações para o algoritmo executar o numero [5]
-        printf("\033[1;34mMENSAGEM:\033[0m Liberando quarto %s da lista, por favor aguarde.\n" /*colocar a variavel que guardou o ID do quarto liberado*/);
-        loading(150, "Carregando");
+                // Remover o hóspede
+                printf("\033[1;34mMENSAGEM:\033[0m Liberando quarto %d da lista, por favor aguarde.\n", guests[i].roomId);
+                // Deslocar todos os hóspedes para cima
+                for (int j = i; j < size - 1; j++) {
+                    guests[j] = guests[j + 1];
+                }
+                loading(150, "Carregando");
 
-        system("cls");
-        printf("\n\n                                          \033[92m============================================\033[0m\n");
-        printf("                                             \033[92mMENSAGEM: Quarto liberado com sucesso!\033[0m\n");
-        printf("                                          \033[92m============================================\033[0m\n\n");
+                system("cls");
+                printf("\n\n                                          \033[92m============================================\033[0m\n");
+                printf("                                             \033[92mMENSAGEM: Quarto liberado com sucesso!\033[0m\n");
+                printf("                                          \033[92m============================================\033[0m\n\n");
+                sleep(2);
+                system("cls");
+
+                return size - 1; // Reduzir o tamanho da lista
+            }
+        }
+
+        // Se o quarto não foi encontrado //
+        printf("\n\n                                          \033[91m============================================\033[0m\n");
+        printf("                                             \033[91mMENSAGEM: Quarto não encontrado!\033[0m\n");
+        printf("                                          \033[91m============================================\033[0m\n\n");
         sleep(2);
         system("cls");
     }
-    if(returnOption == 0){
+    if (returnOption == 0) {
         system("cls");
         return size;
     }
-    return size-1;
+    return size - 1;
 }
 
 void countEmptyRooms(Guest* guests, int size)
