@@ -19,8 +19,22 @@ void loading(int milliseconds, char *text){
         }        
         printf("] %d%% \r", percent);
         fflush(stdout);
-        usleep(milliseconds * 1000);
+        Sleep(milliseconds);
         printf("\r");
     }
     printf("\n\n");
+}
+
+void removeLine(int value){
+    for(int i = 0; i < value; i++){
+        printf("\033[A\033[K");
+    }
+}
+
+int countString(char *string){
+    int count = 0;
+    while (string[count] != '\0') {
+        count++;
+    }
+    return count;
 }

@@ -6,7 +6,11 @@ int readFile (Guest* guest)
 {   
     FILE* file = fopen("dados.txt", "r");
     if (file == NULL) {
-        printf("Arquivo nao pode ser aberto\n");
+        system("cls");
+        printf("\a");
+        printf("\n                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
+        printf("\n                                      *** Arquivo inválido, não foi possível acessar ***");
+        printf("\n                                 \033[1;31m============================================================\033[0m");
         return -1;
     }
 
@@ -47,7 +51,11 @@ void writeFile (Guest* guests, int size)
 {
     FILE* file = fopen("dados.txt", "w");
     if (file == NULL) {
-        printf("Arquivo nao pode ser aberto\n");
+        system("cls");
+        printf("\a");
+        printf("\n                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
+        printf("\n                                      *** Arquivo inválido, não foi possível acessar ***");
+        printf("\n                                 \033[1;31m============================================================\033[0m");
         return;
     }
 
@@ -60,7 +68,11 @@ void writeFile (Guest* guests, int size)
     }
 
     fclose(file);
-
-    printf("Dados salvos com sucesso! \n");
+    system("cls");
+    printf("\n\n\n\n                                          \033[92m==================================================\033[0m\n");
+    printf("                                           \033[92mMENSAGEM: Dados do arquivo salvo com sucesso!\033[0m\n");
+    printf("                                          \033[92m==================================================\033[0m\n\n");
+    Sleep(1500);
+    system("cls");
     return;
 }

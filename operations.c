@@ -1,72 +1,120 @@
 #include "operations.h"
+#include "commands.h"
+#include <windows.h>
 
 int insertGuests(Guest* guests, int size)
 {
+    system("cls");
 
-    printf("--- \n");
-    printf("1 - Inserir hóspedes em um quarto vazio (um quarto pode ter mais de um hóspede) \n");
-    printf("--- \n");
-
-    sort(guests, size);
-
-    Guest new;
-    Guest hasGuestInSameRoom;
-    do
-    {
-        printf("Digite o Codigo do quarto: \n");
-        printf("(A - Z) \n");
-        printf("9 - Voltar \n");
-        fflush(stdin);
-        scanf("%c", &new.roomId);
-        new.roomId = toupper(new.roomId);
-        if(new.roomId == '9') return size;
-        hasGuestInSameRoom = searchByRoomId(guests, new.roomId, size);
-        if(strcmp(hasGuestInSameRoom.name, "NULL") != 0) {
-            printf("Quarto ja esta em uso! Tente outro quarto. \n\n");
-        }
-    } while (strcmp(hasGuestInSameRoom.name, "NULL") != 0);
-
+    int returnOption = 0;
     char addOneMoreGuest;
-    do
-    {
-        
-        printf("Digite o Nome do Hóspede: \n");
-        printf("9 - Voltar \n");
-        fflush(stdin);
-        fgets(new.name, sizeof(new.name), stdin);
-        removeNewlineCh(new.name);
-        if(new.name[0] == '9') return size;
+    int line = 0;
 
-        printf("Digite a Idade do Hóspede: \n");
+    secondaryMenu1:
+    do{ 
+        printf("\n\n------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
+        printf("                                 ============================================================\n");        
+        printf("                                   [1] Inserir hóspedes em um quarto vazio\n");
+        printf("                                   [0] Voltar para o menu principal\n");
+        printf("                                 ============================================================\n");
+        printf("-------------------------------------------------------------------------------------------------------------------------------\n");
         fflush(stdin);
-        scanf("%d", &new.age);
+        printf("--> Digite o numero desejado: ");
+        scanf("%d",&returnOption);
 
-        do
-        {
-            printf("Digite o Genero do Hóspede: \n");
-            printf("M = Masculino \n");
-            printf("F = Feminino \n");
-            printf("9 - Voltar \n");
+        if(returnOption != 1 && returnOption != 0){
+            system("cls");
+            printf("\a");
+            printf("\n                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
+            printf("\n                                      *** Opçaõ inválida, digite o numero '1' ou '0' ***");
+            printf("\n                                 \033[1;31m============================================================\033[0m");
+        }
+    }while(returnOption != 1 && returnOption != 0);
+
+    if(returnOption == 1){
+        system("cls");
+        printf("\n\n------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
+        printf("                                 ============================================================\n");        
+        printf("                                 \033[1;34m->[1] Inserir hóspedes em um quarto vazio\033[0m\n");
+        printf("                                   [0] Voltar para o menu principal\n");
+        printf("                                 ============================================================\n");
+        printf("-------------------------------------------------------------------------------------------------------------------------------\n");
+        sort(guests, size);
+
+        Guest new;
+        Guest hasGuestInSameRoom;
+
+        do{
+            printf("--> Insira código do quarto (A-Z): ");
             fflush(stdin);
-            scanf("%c", &new.gender);
-            new.gender = toupper(new.gender);
-            if(new.gender == '9') return size;
-        } while (new.gender != 'F' && new.gender != 'M');
+            scanf("%c", &new.roomId);
+            new.roomId = toupper(new.roomId);
+            hasGuestInSameRoom = searchByRoomId(guests, new.roomId, size);
+            if(strcmp(hasGuestInSameRoom.name, "NULL") != 0) {
+                line = 1;
+                removeLine(line);
+                printf("\n                                 \033[1;31m============================================================\033[0m");
+                printf("\n                                       *** Ops! Quarto ocupado, Tente outro quarto. ***");
+                printf("\n                                 \033[1;31m============================================================\033[0m\n\n");
+                Sleep(1500);
+                line = 5;
+                removeLine(line);
+            }
+        } while (strcmp(hasGuestInSameRoom.name, "NULL") != 0);
 
-        printf("Deseja adicionar mais um Hóspede para este quarto? \n");
-        printf("S = Sim \n");
-        printf("N = Nao \n");
-        printf("9 - Cancelar \n");
-        fflush(stdin);
-        scanf("%c", &addOneMoreGuest);
-        addOneMoreGuest = toupper(addOneMoreGuest);
-        if(addOneMoreGuest == '9') return size;
+        system("cls");
+        printf("\n\n                             ---------------------  Quarto %c \033[92m(Adicionando)\033[0m --------------------",new.roomId);
 
-        guests[size] = new;
-        size++;
-    } while (addOneMoreGuest == 'S');
-    
-    return size;
+        do{
+            printf("\n                                 ============================================================\n"); 
+            printf("                                  -> Nome: ");
+            fflush(stdin);
+            fgets(new.name, sizeof(new.name), stdin);
+            removeNewlineCh(new.name);
+            printf("                                  -> Idade: ");
+            fflush(stdin);
+            scanf("%d", &new.age);
+
+            do
+            {
+                printf("                                  -> Gênero(M/F): ");
+                fflush(stdin);
+                scanf("%c", &new.gender);
+                new.gender = toupper(new.gender);
+            } while (new.gender != 'F' && new.gender != 'M');
+            printf("                                 ============================================================\n");
+            printf("                             --------------------------------------------------------------------\n");
+
+            printf("\nDeseja adicionar mais um Hóspede para este quarto(s/n)? ");
+            fflush(stdin);
+            scanf("%c", &addOneMoreGuest);
+            addOneMoreGuest = toupper(addOneMoreGuest);
+
+            if(addOneMoreGuest == 'S'){
+                int line = 3;
+                removeLine(line);
+            }
+
+            guests[size] = new;
+            size++;
+        } while (addOneMoreGuest == 'S');
+
+        line = 3;
+        removeLine(line);
+        printf("                             --------------------------------------------------------------------\n");
+        printf("\n\033[1;34mMENSAGEM:\033[0m Adicionando na lista, por favor aguarde.\n");
+        loading(100, "Carregando");
+        system("cls");
+        printf("\n\n\n\n                                          \033[92m============================================\033[0m\n");
+        printf("                                           \033[92mMENSAGEM: Hóspede adicionado com sucesso!\033[0m\n");
+        printf("                                          \033[92m============================================\033[0m\n\n");
+        Sleep(1500);
+        system("cls");
+        return size;
+    }
+    if(returnOption == 0){
+        system("cls");
+    }    
 }
 
 void listGuests(Guest* guests, int size)
@@ -74,51 +122,32 @@ void listGuests(Guest* guests, int size)
     system("cls");
     sort(guests, size);
 
-    int returnOption = 0;
-    do{
-        printf("\n\n------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
-        printf("                                 ============================================================\n");        
-        printf("                                   [2] Listar hóspedes por ordem alfabética\n");
-        printf("                                   [0] Voltar para o menu principal\n");
-        printf("                                 ============================================================\n");
-        printf("-------------------------------------------------------------------------------------------------------------------------------\n");
-        fflush(stdin);
-        printf("--> Digite o numero desejado: ");
-        scanf("%d",&returnOption);
-        
-        if(returnOption != 2 && returnOption != 0){
-            system("cls");
-            printf("\a");
-            printf("\n\n                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
-            printf("\n                                      *** Opçaõ inválida, digite o numero '2' ou '0' ***");
-            printf("\n                                 \033[1;31m============================================================\033[0m\n");
+    printf("\n------------------------------------------------- Lista por ordem alfabética --------------------------------------------------\n");
+    for(int i = 0; i<size; i++){
+        Sleep(200);
+        printf("\n          ============================================================================================================\n");
+        Sleep(150);
+        printf("          \033[1m Nome:\033[0m %s \n", guests[i].name);
+        Sleep(150);
+        printf("          \033[1m Idade:\033[0m %d \n", guests[i].age);
+        Sleep(150);
+        if(guests[i].gender == 'M'){
+            printf("          \033[1m Genero:\033[0m Masculino \n");
+        } else if(guests[i].gender == 'F'){
+            printf("          \033[1m Genero:\033[0m Feminino \n");
         }
-    }while(returnOption != 2 && returnOption != 0);
-
-    if(returnOption == 2){
-        system("cls");
-        printf("\n------------------------------------------------- Lista por ordem alfabética --------------------------------------------------\n");
-        for(int i = 0; i<size; i++){
-            printf("\n          ============================================================================================================\n");
-            printf("\n          \033[1m Nome:\033[0m %s", guests[i].name);
-            printf("\n          \033[1m Idade:\033[0m %d", guests[i].age);
-            printf("\n          \033[1m Genero:\033[0m %c", guests[i].gender);
-            printf("\n          \033[1m ID do quarto:\033[0m %c \n", guests[i].roomId);
-            printf("\n          ============================================================================================================\n");
-        }
-        printf("-------------------------------------------------------------------------------------------------------------------------------\n\n");
-
-        for(int i = 10; i >= 0; i--){
-            printf("\r\033[1;34mMENSAGEM:\033[0m Voltando para o menu principal em... %d ", i);
-            sleep(1);
-        }
-        system("cls");
+        Sleep(150);
+        printf("          \033[1m ID do quarto:\033[0m %c \n", guests[i].roomId);
+        Sleep(150);
+        printf("          ============================================================================================================\n");
     }
+    printf("-------------------------------------------------------------------------------------------------------------------------------\n\n");
 
-    if(returnOption == 0){
-        system("cls");
-        return;
+    for(int i = 10; i >= 0; i--){
+        printf("\r\033[1;34mMENSAGEM:\033[0m Voltando para o menu principal em... %d ", i);
+        sleep(1);
     }
+    system("cls");
     return;
 }
 
@@ -127,7 +156,9 @@ void getGuestByName(Guest* guests, int size)
     system("cls");
 
     int returnOption = 0;
-    do{
+    int messageGuestNotFound = 0;
+    secondaryMenu3:
+    do{ 
         printf("\n\n------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
         printf("                                 ============================================================\n");        
         printf("                                   [3] Buscar hóspede\n");
@@ -139,40 +170,82 @@ void getGuestByName(Guest* guests, int size)
         scanf("%d",&returnOption);
 
         if(returnOption != 3 && returnOption != 0){
-            system("cls");
+            if(messageGuestNotFound == 0){
+                system("cls");
+                messageGuestNotFound = 0;
+            }else{
+                int line = 9;
+                removeLine(line);
+            }
             printf("\a");
-            printf("\n\n                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
+            printf("\n                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
             printf("\n                                      *** Opçaõ inválida, digite o numero '3' ou '0' ***");
             printf("\n                                 \033[1;31m============================================================\033[0m");
         }
     }while(returnOption != 3 && returnOption != 0);
 
     if(returnOption == 3){
-        system("cls");
 
-        printf("\nDigite o nome do hóspede que deseja encontrar: ");
-        char name [51];
+        system("cls");
+        char name[50];
+        char firstName[20];
+
+        printf("\n\n------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
+        printf("                                 ============================================================\n");        
+        printf("                                 \033[1;34m->[3] Buscar hóspede\033[0m\n");
+        printf("                                   [0] Voltar para o menu principal\n");
+        printf("                                 ============================================================\n");
+        printf("-------------------------------------------------------------------------------------------------------------------------------\n");
+        printf("--> Digite nome do hóspede que deseja encontrar: ");
         fflush (stdin);
         fgets (name, sizeof(name), stdin);
         removeNewlineCh(name);
         Guest guest = binarySearch(guests, name, 0, size);
          
         if (strcmp (guest.name, "NULL")  == 0) {
-            printf("hospede nao Encontrado");
-            return;
+
+            system("cls");
+
+            sscanf(name, "%s", firstName);
+            int size = countString(firstName);
+
+            printf("\n\n                                 \033[38;5;208m=================  HÓSPEDE NÃO ENCONTRADO  =================\033[0m");
+                if(size >= 8){
+                    printf("\n                                    \033[38;5;208m*** Hóspede %.6s... não foi encontrado na lista ***\033[0m", firstName);
+                }else{
+                    printf("\n                                      \033[38;5;208m*** Hóspede %s não foi encontrado na lista ***\033[0m", firstName);
+                }
+            printf("\n                                 \033[38;5;208m============================================================\033[0m\n");
+
+            messageGuestNotFound ++;
+            sleep(2);
+            goto secondaryMenu3;
         }
     
         system("cls");
-        printf("\n\033[;34mMENSAGEM:\033[0m Buscando '%s' na lista, por favor aguarde.\n", name);
-        loading(150, "Carregando");
+        printf("\n\033[1;34mMENSAGEM:\033[0m Buscando '%s' na lista, por favor aguarde.\n", name);
+        loading(100, "Carregando");
         
         system("cls");
-        printf("----------------------------------------------------- Resultado da busca ------------------------------------------------------\n");
-        printf("\n                                 Nome:%s", guest.name);
-        printf("\n                                 Genero:%c",guest.gender);
-        printf("\n                                 Idade:%d", guest.age);
-        printf("\n                                 ID:%c", guest.roomId);
-        printf("\n-------------------------------------------------------------------------------------------------------------------------------\n\n");
+
+        printf("\n\n                              ----------------------- Resultado da busca -----------------------\n");
+        printf("                                 ============================================================");
+        Sleep(150);
+        printf("\n                                  Nome: %s", guest.name);
+        Sleep(150);
+        printf("\n                                  Idade: %d", guest.age); 
+        Sleep(150);
+        if(guest.gender == 'M'){
+            printf("\n                                  \033[1mGenero:\033[0m Masculino");
+        } else if(guest.gender == 'F'){
+            printf("\n                                  \033[1mGenero:\033[0m Feminino");
+        } 
+        Sleep(150);
+        printf("\n                                  ID do Quarto: %c", guest.roomId); 
+        Sleep(150);
+        printf("\n                                 ============================================================"); 
+        printf("\n                              ------------------------------------------------------------------\n\n");
+
         for(int i = 10; i >= 0; i--){
             printf("\r\033[1;34mMENSAGEM:\033[0m Voltando para o menu principal em... %d ", i);
             sleep(1);
@@ -191,8 +264,11 @@ void editGuest(Guest* guests, int size)
     system("cls");
 
     int returnOption = 0;
+    int messageGuestNotFound = 0;
+    int line = 0;
+    secondaryMenu4:
     do{
-        printf("------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
+        printf("\n\n------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
         printf("                                 ============================================================\n");        
         printf("                                   [4] Editar hóspede\n");
         printf("                                   [0] Voltar para o menu principal\n");
@@ -203,98 +279,126 @@ void editGuest(Guest* guests, int size)
         scanf("%d",&returnOption);
 
         if(returnOption != 4 && returnOption != 0){
-            system("cls");
+            if(messageGuestNotFound == 0){
+                system("cls");
+                printf("\n");
+                messageGuestNotFound = 0;
+            }else{
+                line = 9;
+                removeLine(line);
+            }
             printf("\a");
-            printf("                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
+            printf("\n                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
             printf("\n                                      *** Opçaõ inválida, digite o numero '4' ou '0' ***");
-            printf("\n                                 \033[1;31m============================================================\033[0m\n\n");
+            printf("\n                                 \033[1;31m============================================================\033[0m");
         }
     }while(returnOption != 4 && returnOption != 0);
 
     if(returnOption == 4){
         system("cls");
+        
         Guest new;
+        char firstName[20];
+        char confirm;
 
-        printf("------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
+        printf("\n\n------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
         printf("                                 ============================================================\n");        
         printf("                                 \033[1;34m->[4] Editar hóspede \033[0m\n");
         printf("                                   [0] Voltar para o menu principal\n");
         printf("                                 ============================================================\n");
         printf("-------------------------------------------------------------------------------------------------------------------------------\n");
-        printf("--> Digite o nome do hóspede que deseja editar: ");
+        printf("--> Digite nome completo do hóspede que deseja editar: ");
         fflush (stdin);
         fgets (new.name, sizeof(new.name), stdin);
         removeNewlineCh(new.name);
 
         sort(guests, size);
         Guest *exists = binarySearchPtr(guests, new.name, 0, size);
+
         if(strcmp(exists->name, "NULL") == 0) {
-            printf("Hóspede nao encontrado!");
-            return;
+            system("cls");
+
+            sscanf(new.name, "%s", firstName);
+            int size = countString(firstName);
+
+            printf("\n\n                                 \033[38;5;208m=================  HÓSPEDE NÃO ENCONTRADO  =================\033[0m");
+                if(size >= 8){
+                    printf("\n                                    \033[38;5;208m*** Hóspede %.6s... não foi encontrado na lista ***\033[0m", firstName);
+                }else{
+                    printf("\n                                      \033[38;5;208m*** Hóspede %s não foi encontrado na lista ***\033[0m", firstName);
+                }
+            printf("\n                                 \033[38;5;208m============================================================\033[0m\n");
+
+            messageGuestNotFound ++;
+            sleep(2);
+            goto secondaryMenu4;
         }
 
         Guest hasGuestInSameRoom;
-        do
-        {
-            printf("Digite o Codigo do quarto: \n");
-            printf("(A - Z) \n");
-            printf("9 - Voltar \n");
-            fflush(stdin);
-            scanf("%c", &new.roomId);
-            new.roomId = toupper(new.roomId);
-            if(new.roomId == '9') return;
-            hasGuestInSameRoom = searchByRoomId(guests, new.roomId, size);
-            if(strcmp(hasGuestInSameRoom.name, "NULL") != 0 && exists->roomId != new.roomId) {
-                printf("Quarto ja esta em uso! Tente outro quarto. \n\n");
-            }
-        } while (strcmp(hasGuestInSameRoom.name, "NULL") != 0 && exists->roomId != new.roomId);
 
-        printf("Digite o Nome do Hóspede: \n");
-        printf("9 - Voltar \n");
+        system("cls");
+        printf("\n\033[31mATENÇÃO:\033[0m Por favor, insira os dados em cada campo abaixo para ser editado.\n");
+        printf("\n%s \033[92m(Editar)\033[0m \n",new.name); 
+
+        printf("  -> Novo nome: ");
         fflush(stdin);
         fgets(new.name, sizeof(new.name), stdin);
         removeNewlineCh(new.name);
-        if(new.name[0] == '9') return;
 
-        printf("Digite a Idade do Hóspede: \n");
+        printf("  -> Idade: ");
         fflush(stdin);
         scanf("%d", &new.age);
 
         do
         {
-            printf("Digite o Genero do Hóspede: \n");
-            printf("M = Masculino \n");
-            printf("F = Feminino \n");
-            printf("9 - Voltar \n");
+            printf("  -> Genero(M/F): ");
             fflush(stdin);
             scanf("%c", &new.gender);
             new.gender = toupper(new.gender);
-            if(new.gender == '9') return;
         } while (new.gender != 'F' && new.gender != 'M');
 
-        char confirm;
+        do{
+            printf("  ->ID do quarto(A-Z): ");
+            fflush(stdin);
+            scanf("%c", &new.roomId);
+            new.roomId = toupper(new.roomId);
+            hasGuestInSameRoom = searchByRoomId(guests, new.roomId, size);
+            if(strcmp(hasGuestInSameRoom.name, "NULL") != 0 && exists->roomId != new.roomId) {
+                line = 1;
+                removeLine(line);
+                printf("\n  \033[1;31m===========================================================\033[0m");
+                printf("\n        *** Ops! Quarto ocupado, Tente outro quarto. ***");
+                printf("\n  \033[1;31m===========================================================\033[0m\n\n");
+                Sleep(1500);
+                line = 5;
+                removeLine(line);
+            }
+        } while (strcmp(hasGuestInSameRoom.name, "NULL") != 0 && exists->roomId != new.roomId);
+
         do
         {
-            printf("Confirmar alteração? \n");
-            printf("S = Sim \n");
-            printf("N = Não \n");
+            printf("\nDeseja confirmar alteração(s/n)? ");
             fflush(stdin);
             scanf("%c", &confirm);
             confirm = toupper(confirm);
         } while (confirm != 'S' && confirm != 'N');
 
-        if(confirm == 'S') {
+        if(confirm == 'S' || confirm == 's') {
             strcpy(exists->name, new.name);
             exists->age = new.age;
             exists->gender = new.gender;
             exists->roomId = new.roomId;
-        }
 
-        for(int i = 2; i >= 0; i--){
-            printf("\r\033[1;34mMENSAGEM:\033[0m Realizando alteração... %d ", i);
-            sleep(1);
+            printf("\n\033[1;34mMENSAGEM:\033[0m Realizando alteração, por favor aguarde\n");
+            loading(100, "Editando");
+            system("cls");
         }
-        system("cls");
+        if(confirm == 'N' || confirm == 'n'){
+            printf("\n\033[1;34mMENSAGEM:\033[0m Por favor, aguarde enquanto desfazemos as alterações nos dados do hóspede.\n");
+            loading(100, "Modificando");
+            system("cls");
+            goto secondaryMenu4;
+        }
     }
     if(returnOption == 0){
         system("cls");
@@ -374,7 +478,7 @@ int removeGuest(Guest* guests, int size) {
                         guests[j] = guests[j + 1];
                     }
 
-                    loading(150, "Carregando");
+                    loading(100, "Carregando");
 
                     system("cls");
                     printf("\n\n \033[92m============================================\033[0m\n");

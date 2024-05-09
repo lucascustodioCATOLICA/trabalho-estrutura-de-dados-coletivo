@@ -2,6 +2,7 @@
 #define OPERATIONS
 
 #include <ctype.h>
+#include <windows.h>
 #include <unistd.h>
 
 #include "types.h"

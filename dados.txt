@@ -3,6 +3,11 @@ F
 20
 C
 ==========
+Bruno
+M
+84
+W
+==========
 Enzo
 M
 10
@@ -13,10 +18,20 @@ F
 38
 M
 ==========
+Gabriel
+M
+14
+K
+==========
 Giovanni
 M
 45
 L
+==========
+Joanna
+F
+29
+Q
 ==========
 Joao Carlos
 M
@@ -28,6 +43,11 @@ M
 20
 A
 ==========
+Lyan Oliveira
+F
+99
+X
+==========
 Natasha
 F
 18
@@ -38,18 +58,8 @@ M
 18
 D
 ==========
-Gabriel
+Xuxe Menegue
 M
-14
-K
-==========
-Joanna
-F
-29
-Q
-==========
-Bruno
-M
-84
-W
+77
+X
 ==========

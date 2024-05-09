@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include <unistd.h>
 
 // Cores para texto em código ANSI
@@ -28,5 +29,7 @@
 #define BOLD_ORANGE  "\033[38;5;208m"
 
 void loading(int milliseconds, char *text);
+void removeLine(int value);
+int countString(char *string);
 
 #endif
