@@ -306,7 +306,7 @@ void editGuest(Guest* guests, int size)
 int removeGuest(Guest* guests, int size) {
     system("cls");
 
-    int returnOption = 0;
+    char returnOption = '\0';
     do {
         printf("------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
         printf("                                 ============================================================\n");
@@ -316,18 +316,18 @@ int removeGuest(Guest* guests, int size) {
         printf("-------------------------------------------------------------------------------------------------------------------------------\n");
         fflush(stdin);
         printf("--> Digite o numero desejado: ");
-        scanf("%d", &returnOption);
+        scanf(" %c", &returnOption);
 
-        if (returnOption != 5 && returnOption != 0) {
+        if (returnOption != '5' && returnOption != '0') {
             system("cls");
             printf("\a");
             printf("                                 \033[1;31m==================   MENSAGEM DE ALERTA   ==================\033[0m");
             printf("\n                                      *** Opção inválida, digite o numero '5' ou '0' ***");
             printf("\n                                 \033[1;31m============================================================\033[0m\n\n");
         }
-    } while (returnOption != 5 && returnOption != 0);
+    } while (returnOption != '5' && returnOption != '0');
 
-    if (returnOption == 5) {
+    if (returnOption == '5') {
         system("cls");
 
         printf("------------------------------------------------------- MENU SECUNDARIO -------------------------------------------------------\n");
@@ -336,25 +336,25 @@ int removeGuest(Guest* guests, int size) {
         printf("                                   [0] Voltar para o menu principal\n");
         printf("                                 ============================================================\n");
         printf("-------------------------------------------------------------------------------------------------------------------------------\n");
-        printf("--> Digite o número do quarto: ");
-        int roomToFree;
+        printf("--> Digite o ID do quarto: ");
+        char roomToFree;
         fflush(stdin);
-        scanf("%d", &roomToFree);
+        scanf(" %c", &roomToFree);
 
         // Encontrar o hóspede no quarto especificado e liberar o quarto
         int i;
         for (i = 0; i < size; i++) {
             if (guests[i].roomId == roomToFree) {
-                printf("\n ID do quarto: %d \033[31m(Liberar)\033[0m", guests[i].roomId);
+                printf("\n ID do quarto: %c \033[31m(Liberar)\033[0m", guests[i].roomId);
                 printf("\n-------------------------------------------------------------------------------------------------------------------------------\n");
                 printf("\n============================================================");
                 printf("\n Nome: %s", guests[i].name);
                 printf("\n Idade: %d", guests[i].age);
-                printf("\n ID: %d", guests[i].roomId);
+                printf("\n ID: %c", guests[i].roomId);
                 printf("\n============================================================\n");
 
                 // Remover o hóspede
-                printf("\033[1;34mMENSAGEM:\033[0m Liberando quarto %d da lista, por favor aguarde.\n", guests[i].roomId);
+                printf("\033[1;34mMENSAGEM:\033[0m Liberando quarto %c da lista, por favor aguarde.\n", guests[i].roomId);
                 // Deslocar todos os hóspedes para cima
                 for (int j = i; j < size - 1; j++) {
                     guests[j] = guests[j + 1];
@@ -379,7 +379,7 @@ int removeGuest(Guest* guests, int size) {
         sleep(2);
         system("cls");
     }
-    if (returnOption == 0) {
+    if (returnOption == '0') {
         system("cls");
         return size;
     }
