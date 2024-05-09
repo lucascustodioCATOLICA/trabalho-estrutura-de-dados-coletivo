@@ -443,7 +443,8 @@ int removeGuest(Guest* guests, int size) {
         printf("--> Digite o ID do quarto: ");
         char roomToFree;
         fflush(stdin);
-        scanf("%s", &roomToFree);
+        scanf("%c", &roomToFree);
+        roomToFree = toupper(roomToFree);
 
         int i;
         for (i = 0; i < size; i++) {
@@ -458,12 +459,12 @@ int removeGuest(Guest* guests, int size) {
                     return size;
                 }
 
-                printf("\n ID do quarto: %s \033[31m(Liberar)\033[0m", guests[i].roomId);
+                printf("\n ID do quarto: %c \033[31m(Liberar)\033[0m", guests[i].roomId);
                 printf("\n-------------------------------------------------------------------------------------------------------------------------------\n");
                 printf("\n============================================================");
                 printf("\n Nome: %s", guests[i].name);
                 printf("\n Idade: %d", guests[i].age);
-                printf("\n ID: %s", guests[i].roomId);
+                printf("\n ID: %c", guests[i].roomId);
                 printf("\n============================================================\n");
 
                 printf("\n\033[1;34mConfirmar liberação do quarto? [S/N]: \033[0m");
@@ -472,7 +473,7 @@ int removeGuest(Guest* guests, int size) {
                 scanf("%c", &confirm);
 
                 if (tolower(confirm) == 's') {
-                    printf("\n\033[1;34mMENSAGEM:\033[0m Liberando quarto %s e removendo informações do hóspede, aguarde.\n", guests[i].roomId);
+                    printf("\n\033[1;34mMENSAGEM:\033[0m Liberando quarto %c e removendo informações do hóspede, aguarde.\n", guests[i].roomId);
 
                     for (int j = i; j < size - 1; j++) {
                         guests[j] = guests[j + 1];
